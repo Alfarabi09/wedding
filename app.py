@@ -10,7 +10,11 @@ init_db()
 @app.route('/')
 def index():
     """Главная страница с приглашением"""
-    return render_template('index.html')
+    lang = request.args.get('lang', 'kk')
+    if lang not in ['kk', 'ru']:
+        lang = 'kk'
+
+    return render_template('index.html', lang=lang)
 
 
 @app.route('/rsvp', methods=['POST'])
@@ -23,15 +27,34 @@ def rsvp():
     will_attend = data.get('willAttend', False)
     guests_count = int(data.get('guestsCount', 1))
     message = data.get('message', '').strip()
+    lang = data.get('lang', 'kk')
 
     if not first_name or not last_name:
-        return jsonify({'success': False, 'error': 'Пожалуйста, заполните имя и фамилию'}), 400
+        error_message = (
+            'Өтінеміз, атыңыз бен тегіңізді толтырыңыз'
+            if lang == 'kk'
+            else 'Пожалуйста, заполните имя и фамилию'
+        )
+        return jsonify({'success': False, 'error': error_message, 'message': error_message}), 400
 
     add_guest(first_name, last_name, will_attend, guests_count, message)
 
+    if lang == 'kk':
+        response_message = (
+            'Жауабыңызға рақмет! Сізді қуанышымызда күтеміз! 💕'
+            if will_attend
+            else 'Жауабыңызға рақмет! Сізсіз сағынамыз 💔'
+        )
+    else:
+        response_message = (
+            'Спасибо за ваш ответ! Мы ждём вас на нашем празднике! 💕'
+            if will_attend
+            else 'Спасибо за ответ! Мы будем скучать без вас 💔'
+        )
+
     return jsonify({
         'success': True,
-        'message': 'Спасибо за ваш ответ! Мы ждём вас на нашем празднике! 💕' if will_attend else 'Спасибо за ответ! Мы будем скучать без вас 💔'
+        'message': response_message
     })
 
 
