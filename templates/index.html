@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадьба Alfarabi & Nuray 💍</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Кнопка управления музыкой -->
+    <button id="musicToggle" class="music-btn">🎵</button>
+    <audio id="bgMusic" loop>
+        <source src="{{ url_for('static', filename='music/wedding.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <!-- НОВЫЙ: Welcome экран -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <div class="welcome-hearts">💕</div>
+            <h1 class="welcome-title">Вы приглашены!</h1>
+            <p class="welcome-subtitle">На свадьбу</p>
+            <h2 class="welcome-names">Alfarabi & Nuray</h2>
+            <button id="enterBtn" class="enter-btn">
+                <span>Открыть приглашение</span>
+                <span class="enter-icon">💌</span>
+            </button>
+            <p class="welcome-hint">🔊 Включите звук для лучшего опыта</p>
+        </div>
+    </div>
+
+    <!-- Конверт -->
+    <div class="envelope-container hidden" id="envelopeContainer">
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <p class="tap-hint">Нажмите, чтобы открыть 💌</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Приглашение -->
+    <div class="invitation-container" id="invitationContainer">
+        <div class="invitation-card">
+            <!-- Декоративные элементы -->
+            <div class="decoration top-left">✿</div>
+            <div class="decoration top-right">✿</div>
+            <div class="decoration bottom-left">✿</div>
+            <div class="decoration bottom-right">✿</div>
+
+            <!-- Фото пары -->
+            <div class="couple-photo">
+                <img src="{{ url_for('static', filename='images/couple.png') }}" alt="Alfarabi & Nuray">
+            </div>
+
+            <!-- Заголовок -->
+            <h1 class="title">Свадьба</h1>
+            <h2 class="names">Alfarabi & Nuray</h2>
+
+            <div class="divider">💍</div>
+
+            <!-- Приглашение -->
+            <p class="invitation-text">
+                Дорогие друзья и близкие!<br>
+                Мы рады пригласить вас разделить с нами<br>
+                самый важный день в нашей жизни!
+            </p>
+
+            <!-- Дата -->
+            <div class="date-section">
+                <div class="date-label">Дата</div>
+                <div class="date">08.08.2026</div>
+                <div class="day">Суббота</div>
+            </div>
+
+            <!-- Место -->
+            <div class="location-section">
+                <div class="location-label">Место проведения</div>
+                <div class="location">Ресторан «Mereke Hall»</div>
+                <div class="city">г. Астана</div>
+                <a href="https://2gis.kz/astana/firm/70000001067098542" target="_blank" class="map-link">
+                    📍 Открыть на карте 2ГИС
+                </a>
+            </div>
+
+            <!-- Время -->
+            <div class="time-section">
+                <div class="time-item">
+                    <span class="time-icon">🥂</span>
+                    <span class="time-label">Сбор гостей</span>
+                    <span class="time-value">17:00</span>
+                </div>
+                <div class="time-item">
+                    <span class="time-icon">💒</span>
+                    <span class="time-label">Начало</span>
+                    <span class="time-value">18:00</span>
+                </div>
+            </div>
+
+            <div class="divider">♥</div>
+
+            <!-- Форма RSVP -->
+            <div class="rsvp-section">
+                <h3>Подтвердите своё присутствие</h3>
+                <form id="rsvpForm">
+                    <div class="form-row">
+                        <input type="text" id="firstName" placeholder="Ваше имя" required>
+                        <input type="text" id="lastName" placeholder="Ваша фамилия" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Вы сможете присутствовать?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="yes" checked>
+                                <span>Да, с радостью! 🎉</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="no">
+                                <span>К сожалению, нет 😢</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="guestsCountGroup">
+                        <label for="guestsCount">Количество гостей (включая вас)</label>
+                        <select id="guestsCount">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Пожелание молодожёнам (необязательно)</label>
+                        <textarea id="message" rows="3" placeholder="Напишите ваше пожелание..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Отправить ответ 💌</button>
+                </form>
+
+                <div id="responseMessage" class="response-message"></div>
+            </div>
+
+            <!-- Футер -->
+            <div class="footer">
+                <p>С любовью и нетерпением ждём вас!</p>
+                <p class="signature">Alfarabi & Nuray</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
