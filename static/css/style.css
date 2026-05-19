@@ -5,7 +5,8 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
     background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c4 50%, #d4b896 100%);
     min-height: 100vh;
     display: flex;
@@ -78,8 +79,8 @@ body {
 }
 
 .envelope {
-    width: 320px;
-    height: 220px;
+    width: 700px;
+    height: 480px;
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
@@ -90,8 +91,8 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(145deg, #f8f4f0 0%, #e8ddd5 100%);
-    border-radius: 10px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 18px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,7 +102,7 @@ body {
 
 .envelope-body::before {
     content: '💕';
-    font-size: 60px;
+    font-size: 90px;
     position: absolute;
     opacity: 0.3;
 }
@@ -109,9 +110,9 @@ body {
 .envelope-flap {
     width: 0;
     height: 0;
-    border-left: 160px solid transparent;
-    border-right: 160px solid transparent;
-    border-top: 120px solid #d4c4b0;
+    border-left: 350px solid transparent;
+    border-right: 350px solid transparent;
+    border-top: 260px solid #d4c4b0;
     position: absolute;
     top: 0;
     left: 0;
@@ -129,8 +130,9 @@ body {
 }
 
 .tap-hint {
-    font-family: 'Great Vibes', cursive;
-    font-size: 24px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 34px;
     color: #8b7355;
     z-index: 1;
 }
@@ -160,12 +162,14 @@ body {
     background: linear-gradient(145deg, #fffef9 0%, #f8f4ef 100%);
     border-radius: 20px;
     padding: 50px 40px;
-    max-width: 600px;
+    width: 700px;
+    max-width: 100%;
     margin: 0 auto;
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
     position: relative;
     border: 3px solid #d4af37;
 }
+
 
 /* Декоративные элементы */
 .decoration {
@@ -199,8 +203,8 @@ body {
 
 /* Заголовки */
 .title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
     font-size: 18px;
     color: #8b7355;
     text-transform: uppercase;
@@ -209,9 +213,11 @@ body {
     margin-bottom: 10px;
 }
 
+
 .names {
-    font-family: 'Great Vibes', cursive;
-    font-size: 52px;
+    font-family: 'Alex Brush', 'Great Vibes', cursive;
+    font-size: 72px;
+    font-weight: 400;
     color: #5c4033;
     text-align: center;
     margin-bottom: 20px;
@@ -346,10 +352,12 @@ body {
     margin-top: 30px;
 }
 
+
 .rsvp-section h3 {
     text-align: center;
-    font-family: 'Great Vibes', cursive;
-    font-size: 32px;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-size: 34px;
+    font-weight: 700;
     color: #5c4033;
     margin-bottom: 25px;
 }
@@ -383,9 +391,11 @@ textarea {
     border: 2px solid #ddd;
     border-radius: 10px;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
     transition: border-color 0.3s;
 }
+
 
 input[type="text"]:focus,
 select:focus,
@@ -466,8 +476,9 @@ textarea:focus {
 }
 
 .signature {
-    font-family: 'Great Vibes', cursive;
-    font-size: 36px;
+    font-family: 'Alex Brush', 'Great Vibes', cursive;
+    font-size: 46px;
+    font-weight: 400;
     color: #d4af37;
     margin-top: 10px;
 }
@@ -475,7 +486,35 @@ textarea:focus {
 /* Адаптивность */
 @media (max-width: 600px) {
     .invitation-card {
+        width: 100%;
         padding: 30px 20px;
+    }
+    .envelope {
+        width: 92vw;
+        height: 62vw;
+        max-height: 420px;
+    }
+
+    .envelope-flap {
+        border-left-width: 46vw;
+        border-right-width: 46vw;
+        border-top-width: 34vw;
+    }
+
+    .tap-hint {
+        font-size: 24px;
+    }
+
+    .welcome-title {
+        font-size: 48px;
+    }
+
+    .welcome-subtitle {
+        font-size: 20px;
+    }
+
+    .welcome-names {
+        font-size: 72px;
     }
     .language-switcher {
         top: 15px;
@@ -486,7 +525,7 @@ textarea:focus {
         padding: 8px 10px;
         font-size: 12px;
     }
-        .music-btn {
+    .music-btn {
         top: 15px;
         right: 15px;
         width: 46px;
@@ -494,7 +533,7 @@ textarea:focus {
         font-size: 22px;
     }
     .names {
-        font-size: 38px;
+        font-size: 60px;
     }
 
     .date {
@@ -558,28 +597,34 @@ textarea:focus {
 }
 
 .welcome-title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    font-size: 24px;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 72px;
+    letter-spacing: 2px;
+    text-transform: none;
+    margin-bottom: 12px;
     color: #d4af37;
+    line-height: 1.05;
 }
 
 .welcome-subtitle {
-    font-size: 18px;
-    color: #aaa;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #f5e6d3;
     margin-bottom: 10px;
 }
 
 .welcome-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: 56px;
+    font-family: 'Alex Brush', 'Great Vibes', cursive;
+    font-size: 96px;
+    font-weight: 400;
     color: #fff;
     margin-bottom: 40px;
     text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+    line-height: 1;
 }
+
 
 .enter-btn {
     background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
@@ -587,8 +632,8 @@ textarea:focus {
     border: none;
     padding: 20px 50px;
     font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
     color: #1a1a2e;
     border-radius: 50px;
     cursor: pointer;
@@ -599,6 +644,7 @@ textarea:focus {
     box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
     animation: shimmer 3s infinite;
 }
+
 
 @keyframes shimmer {
     0%, 100% { background-position: 0% 50%; }

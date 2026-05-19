@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const translations = {
         kk: {
             pageTitle: 'Alfarabi & Nuray үйлену тойы 💍',
-            welcomeTitle: 'Сіз шақырылдыңыз!',
+            welcomeTitle: 'Шақыру билеті',
             welcomeSubtitle: 'Үйлену тойына',
             openInvitation: 'Шақыруды ашу',
             soundHint: '🔊 Жақсы әсер алу үшін дыбысты қосыңыз',
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         ru: {
             pageTitle: 'Свадьба Alfarabi & Nuray 💍',
-            welcomeTitle: 'Вы приглашены!',
+            welcomeTitle: 'Пригласительный билет',
             welcomeSubtitle: 'На свадьбу',
             openInvitation: 'Открыть приглашение',
             soundHint: '🔊 Включите звук для лучшего опыта',
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     let currentLang = document.body.dataset.lang || localStorage.getItem('siteLang') || 'kk';
+
 
     function applyLanguage(lang) {
         currentLang = lang;
