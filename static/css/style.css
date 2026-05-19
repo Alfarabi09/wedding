@@ -757,6 +757,38 @@ textarea:focus {
         padding: 0 10px;
     }
 
+    .envelope-container {
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .envelope {
+        width: min(92vw, 420px);
+        height: min(62vw, 285px);
+    }
+
+    .envelope-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .envelope-flap {
+        border-left-width: min(46vw, 210px);
+        border-right-width: min(46vw, 210px);
+        border-top-width: min(31vw, 142px);
+    }
+
+    .tap-hint {
+        width: 100%;
+        padding: 0 24px;
+        text-align: center;
+        font-size: 22px;
+        line-height: 1.25;
+        transform: translateY(12px);
+    }
+
     .language-switcher {
         top: 14px;
         left: 14px;
