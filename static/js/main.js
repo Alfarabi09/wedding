@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
         kk: {
             pageTitle: 'Alfarabi & Nuray үйлену тойы 💍',
             welcomeTitle: 'Шақыру билеті',
-            welcomeSubtitle: 'Үйлену тойына',
-            openInvitation: 'Шақыруды ашу',
-            soundHint: '🔊 Жақсы әсер алу үшін дыбысты қосыңыз',
             tapToOpen: 'Ашу үшін басыңыз 💌',
             weddingTitle: 'Үйлену тойы',
             invitationText: 'Құрметті достар мен жақындар!<br>Сіздерді өміріміздегі ең маңызды күнді<br>бірге бөлісуге шақырамыз!',
@@ -33,9 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ru: {
             pageTitle: 'Свадьба Alfarabi & Nuray 💍',
             welcomeTitle: 'Пригласительный билет',
-            welcomeSubtitle: 'На свадьбу',
-            openInvitation: 'Открыть приглашение',
-            soundHint: '🔊 Включите звук для лучшего опыта',
             tapToOpen: 'Нажмите, чтобы открыть 💌',
             weddingTitle: 'Свадьба',
             invitationText: 'Дорогие друзья и близкие!<br>Мы рады пригласить вас разделить с нами<br>самый важный день в нашей жизни!',
@@ -63,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     let currentLang = document.body.dataset.lang || localStorage.getItem('siteLang') || 'kk';
-
 
     function applyLanguage(lang) {
         currentLang = lang;
@@ -99,10 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.title = translations[lang].pageTitle;
     }
 
-    const welcomeScreen = document.getElementById('welcomeScreen');
-    const enterBtn = document.getElementById('enterBtn');
+    const envelopeScreen = document.getElementById('envelopeScreen');
     const envelope = document.getElementById('envelope');
-    const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationContainer = document.getElementById('invitationContainer');
     const musicToggle = document.getElementById('musicToggle');
     const bgMusic = document.getElementById('bgMusic');
@@ -118,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     applyLanguage(currentLang);
 
-    // Функция запуска музыки
     function startMusic() {
         bgMusic.volume = 0.3;
         bgMusic.play().then(() => {
@@ -127,31 +117,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }).catch(e => console.log(translations[currentLang].autoplayBlocked, e));
     }
 
-    // Клик на кнопку "Открыть приглашение" - запускает музыку!
-    enterBtn.addEventListener('click', function() {
-        // Запускаем музыку сразу при клике
-        startMusic();
-
-        // Скрываем welcome экран
-        welcomeScreen.classList.add('hidden');
-
-        // Показываем конверт
-        envelopeContainer.classList.remove('hidden');
-        envelopeContainer.classList.add('visible');
-    });
-
-    // Открытие конверта
+    let isOpening = false;
     envelope.addEventListener('click', function() {
+        if (isOpening) return;
+        isOpening = true;
+
         envelope.classList.add('open');
 
-        // Скрытие конверта и показ приглашения
         setTimeout(() => {
-            envelopeContainer.classList.add('hidden');
+            startMusic();
+        }, 500);
+
+        setTimeout(() => {
+            envelopeScreen.classList.add('hidden');
             invitationContainer.classList.add('visible');
-        }, 800);
+        }, 1400);
     });
 
-    // Управление музыкой
     let isPlaying = false;
     musicToggle.addEventListener('click', function() {
         if (isPlaying) {
@@ -178,14 +160,12 @@ document.addEventListener('DOMContentLoaded', function() {
         musicToggle.textContent = '🔇';
     });
 
-    // Показ/скрытие поля количества гостей
     document.querySelectorAll('input[name="attendance"]').forEach(radio => {
         radio.addEventListener('change', function() {
             guestsCountGroup.style.display = this.value === 'yes' ? 'block' : 'none';
         });
     });
 
-    // Отправка формы
     rsvpForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -230,9 +210,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Эффект конфетти
     function createConfetti() {
-        const colors = ['#d4af37', '#ff6b6b', '#4ecdc4', '#ffe66d', '#ff8e53'];
+        const colors = ['#4a90d9', '#60a5fa', '#93c5fd', '#dbeafe', '#ffffff'];
 
         for (let i = 0; i < 50; i++) {
             const confetti = document.createElement('div');

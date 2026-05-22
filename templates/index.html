@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body data-lang="{{ lang }}">
-    <!-- Кнопка управления музыкой -->
     <button id="musicToggle" class="music-btn">🎵</button>
 
     <div class="language-switcher">
@@ -20,65 +19,51 @@
         <source src="{{ url_for('static', filename='music/wedding.mp3') }}" type="audio/mpeg">
     </audio>
 
-    <!-- Welcome экран -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <div class="welcome-content">
-            <h1 class="welcome-title" data-i18n="welcomeTitle">Шақыру билеті</h1>
-            <p class="welcome-subtitle" data-i18n="welcomeSubtitle">Үйлену тойына</p>
-            <h2 class="welcome-names">Alfarabi & Nuray</h2>
-            <button id="enterBtn" class="enter-btn">
-                <span data-i18n="openInvitation">Шақыруды ашу</span>
-                <span class="enter-icon">💌</span>
-            </button>
-            <p class="welcome-hint" data-i18n="soundHint">🔊 Жақсы әсер алу үшін дыбысты қосыңыз</p>
-        </div>
-    </div>
-
-    <!-- Конверт -->
-    <div class="envelope-container hidden" id="envelopeContainer">
+    <div class="envelope-screen" id="envelopeScreen">
+        <h1 class="envelope-names">Alfarabi &amp; Nuray</h1>
         <div class="envelope" id="envelope">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body">
-                <p class="tap-hint" data-i18n="tapToOpen">Ашу үшін басыңыз 💌</p>
+            <div class="letter-preview">
+                <div class="letter-names">Alfarabi &amp; Nuray</div>
+                <div class="letter-text" data-i18n="tapToOpen">Ашу үшін басыңыз</div>
             </div>
+            <div class="envelope-back"></div>
+            <div class="envelope-left"></div>
+            <div class="envelope-right"></div>
+            <div class="envelope-bottom"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">A&nbsp;N</div>
         </div>
+        <p class="envelope-subtitle" data-i18n="welcomeTitle">Шақыру билеті</p>
     </div>
 
-    <!-- Приглашение -->
     <div class="invitation-container" id="invitationContainer">
         <div class="invitation-card">
-            <!-- Декоративные элементы -->
             <div class="decoration top-left">✿</div>
             <div class="decoration top-right">✿</div>
             <div class="decoration bottom-left">✿</div>
             <div class="decoration bottom-right">✿</div>
 
-            <!-- Фото пары -->
             <div class="couple-photo">
                 <img src="{{ url_for('static', filename='images/couple.png') }}" alt="Alfarabi & Nuray">
             </div>
 
-            <!-- Заголовок -->
             <h1 class="title" data-i18n="weddingTitle">Үйлену тойы</h1>
             <h2 class="names">Alfarabi & Nuray</h2>
 
             <div class="divider">💍</div>
 
-            <!-- Приглашение -->
             <p class="invitation-text" data-i18n-html="invitationText">
                 Құрметті достар мен жақындар!<br>
                 Сіздерді өміріміздегі ең маңызды күнді<br>
                 бірге бөлісуге шақырамыз!
             </p>
 
-            <!-- Дата -->
             <div class="date-section">
                 <div class="date-label" data-i18n="dateLabel">Күні</div>
                 <div class="date">08.08.2026</div>
                 <div class="day" data-i18n="day">Сенбі</div>
             </div>
 
-            <!-- Место -->
             <div class="location-section">
                 <div class="location-label" data-i18n="locationLabel">Өтетін орны</div>
                 <div class="location">«Mereke Hall» мейрамханасы</div>
@@ -88,7 +73,6 @@
                 </a>
             </div>
 
-            <!-- Время -->
             <div class="time-section">
                 <div class="time-item">
                     <span class="time-icon">🥂</span>
@@ -104,7 +88,6 @@
 
             <div class="divider">♥</div>
 
-            <!-- Форма RSVP -->
             <div class="rsvp-section">
                 <h3 data-i18n="rsvpTitle">Қатысуыңызды растаңыз</h3>
                 <form id="rsvpForm">
@@ -148,7 +131,6 @@
                 <div id="responseMessage" class="response-message"></div>
             </div>
 
-            <!-- Футер -->
             <div class="footer">
                 <p data-i18n="footerText">Сіздерді сүйіспеншілікпен және асыға күтеміз!</p>
                 <p class="signature">Alfarabi & Nuray</p>
