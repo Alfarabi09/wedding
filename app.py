@@ -1,11 +1,9 @@
-from flask import Flask, render_template, request, jsonify
-from database import init_db, add_guest, get_all_guests, get_statistics
+﻿from flask import Flask, render_template, request, jsonify
 from sheets_sync import sync_guest_to_sheets, init_sheets_headers
 
 app = Flask(__name__)
 
-# Инициализация базы данных при запуске
-init_db()
+# Инициализация Google Sheets при запуске
 init_sheets_headers()
 
 
@@ -30,11 +28,8 @@ def rsvp():
         error_message = 'Пожалуйста, заполните имя и фамилию'
         return jsonify({'success': False, 'error': error_message, 'message': error_message}), 400
 
-    # Добавляем гостя в SQLite
-    add_guest(first_name, last_name, will_attend, guests_count, message)
-    
-    # Синхронизируем с Google Sheets (асинхронно)
-    sync_guest_to_sheets(first_name, last_name, will_attend, guests_count, message)
+    # Отправляем гостя сразу в Google Sheets
+    sync_success = sync_guest_to_sheets(first_name, last_name, will_attend, guests_count, message)
 
     response_message = (
         'Спасибо за ваш ответ! Мы ждём вас на нашем празднике! 💕'
@@ -43,19 +38,8 @@ def rsvp():
     )
 
     return jsonify({
-        'success': True,
+        'success': sync_success,
         'message': response_message
-    })
-
-
-@app.route('/admin/guests')
-def admin_guests():
-    """Страница администратора для просмотра гостей"""
-    guests = get_all_guests()
-    stats = get_statistics()
-    return jsonify({
-        'guests': guests,
-        'statistics': stats
     })
 
 
