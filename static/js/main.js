@@ -3,8 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
         kk: {
             pageTitle: 'Alfarabi & Nuray үйлену тойы 💍',
             welcomeTitle: 'Шақыру билеті',
-            tapToOpen: 'Ашу үшін басыңыз 💌',
-            weddingTitle: 'Үйлену тойы',
+            tapToOpen: 'Ашу үшін басыңыз',
+            receivedText: 'Сіз шақыру алдыңыз. басыңыз',
+            openButton: 'БАСЫҢЫЗ',
+            hintText: 'Шақыруды ашу үшін «БАСЫҢЫЗ» батырмасын басыңыз.',
+            weddingTitle: 'Үйлену той',
             invitationText: 'Құрметті достар мен жақындар!<br>Сіздерді өміріміздегі ең маңызды күнді<br>бірге бөлісуге шақырамыз!',
             dateLabel: 'Күні',
             day: 'Сенбі',
@@ -30,7 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         ru: {
             pageTitle: 'Свадьба Alfarabi & Nuray 💍',
             welcomeTitle: 'Пригласительный билет',
-            tapToOpen: 'Нажмите, чтобы открыть 💌',
+            tapToOpen: 'Нажмите, чтобы открыть',
+            receivedText: 'Вы получили приглашение. Нажмите',
+            openButton: 'ОТКРЫТЬ',
+            hintText: 'Нажмите кнопку «ОТКРЫТЬ», чтобы открыть приглашение.',
             weddingTitle: 'Свадьба',
             invitationText: 'Дорогие друзья и близкие!<br>Мы рады пригласить вас разделить с нами<br>самый важный день в нашей жизни!',
             dateLabel: 'Дата',
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const envelopeScreen = document.getElementById('envelopeScreen');
-    const envelope = document.getElementById('envelope');
+    const envelopeButton = document.getElementById('envelopeButton');
     const invitationContainer = document.getElementById('invitationContainer');
     const musicToggle = document.getElementById('musicToggle');
     const bgMusic = document.getElementById('bgMusic');
@@ -118,20 +124,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let isOpening = false;
-    envelope.addEventListener('click', function() {
+
+    function openInvitation() {
         if (isOpening) return;
         isOpening = true;
 
-        envelope.classList.add('open');
+        envelopeScreen.classList.add('opening');
 
         setTimeout(() => {
             startMusic();
-        }, 500);
+        }, 600);
 
         setTimeout(() => {
             envelopeScreen.classList.add('hidden');
             invitationContainer.classList.add('visible');
-        }, 1400);
+        }, 2200);
+    }
+
+    envelopeButton.addEventListener('click', openInvitation);
+    envelopeButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openInvitation();
+        }
     });
 
     let isPlaying = false;
