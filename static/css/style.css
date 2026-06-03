@@ -344,6 +344,53 @@ body {
     font-weight: 500;
 }
 
+.countdown-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.countdown-label {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    min-width: 100px;
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.countdown-item span {
+    display: block;
+    font-size: 38px;
+    color: #5c4033;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.countdown-item small {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #7a6a59;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /* Форма RSVP */
 .rsvp-section {
     background: linear-gradient(135deg, #f0ebe5 0%, #e5ddd3 100%);
@@ -515,6 +562,19 @@ textarea:focus {
 
     .welcome-names {
         font-size: 72px;
+    }
+    .countdown-timer {
+        gap: 10px;
+    }
+    .countdown-item {
+        min-width: 74px;
+        padding: 14px 16px;
+    }
+    .countdown-item span {
+        font-size: 30px;
+    }
+    .countdown-item small {
+        font-size: 11px;
     }
     .language-switcher {
         top: 15px;

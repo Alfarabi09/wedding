@@ -1,106 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const translations = {
-        kk: {
-            pageTitle: 'Alfarabi & Nuray үйлену тойы 💍',
-            welcomeTitle: 'Шақыру билеті',
-            welcomeSubtitle: 'Үйлену тойына',
-            openInvitation: 'Шақыруды ашу',
-            soundHint: '🔊 Жақсы әсер алу үшін дыбысты қосыңыз',
-            tapToOpen: 'Ашу үшін басыңыз 💌',
-            weddingTitle: 'Үйлену тойы',
-            invitationText: 'Құрметті достар мен жақындар!<br>Сіздерді өміріміздегі ең маңызды күнді<br>бірге бөлісуге шақырамыз!',
-            dateLabel: 'Күні',
-            day: 'Сенбі',
-            locationLabel: 'Өтетін орны',
-            city: 'Астана қ.',
-            mapLink: '📍 2ГИС картасынан ашу',
-            guestGathering: 'Қонақтарды қарсы алу',
-            startTime: 'Басталуы',
-            rsvpTitle: 'Қатысуыңызды растаңыз',
-            firstNamePlaceholder: 'Атыңыз',
-            lastNamePlaceholder: 'Тегіңіз',
-            attendanceQuestion: 'Сіз келе аласыз ба?',
-            attendanceYes: 'Иә, қуана келемін! 🎉',
-            attendanceNo: 'Өкінішке қарай, келе алмаймын 😢',
-            guestsCountLabel: 'Қонақтар саны — өзіңізді қоса алғанда',
-            messageLabel: 'Жас жұбайларға тілек — міндетті емес',
-            messagePlaceholder: 'Тілегіңізді жазыңыз...',
-            submitButton: 'Жауап жіберу 💌',
-            footerText: 'Сіздерді сүйіспеншілікпен және асыға күтеміз!',
-            requestError: 'Қате орын алды. Қайтадан көріңіз.',
-            autoplayBlocked: 'Автоойнату бұғатталды:'
-        },
-        ru: {
-            pageTitle: 'Свадьба Alfarabi & Nuray 💍',
-            welcomeTitle: 'Пригласительный билет',
-            welcomeSubtitle: 'На свадьбу',
-            openInvitation: 'Открыть приглашение',
-            soundHint: '🔊 Включите звук для лучшего опыта',
-            tapToOpen: 'Нажмите, чтобы открыть 💌',
-            weddingTitle: 'Свадьба',
-            invitationText: 'Дорогие друзья и близкие!<br>Мы рады пригласить вас разделить с нами<br>самый важный день в нашей жизни!',
-            dateLabel: 'Дата',
-            day: 'Суббота',
-            locationLabel: 'Место проведения',
-            city: 'г. Астана',
-            mapLink: '📍 Открыть на карте 2ГИС',
-            guestGathering: 'Сбор гостей',
-            startTime: 'Начало',
-            rsvpTitle: 'Подтвердите своё присутствие',
-            firstNamePlaceholder: 'Ваше имя',
-            lastNamePlaceholder: 'Ваша фамилия',
-            attendanceQuestion: 'Вы сможете присутствовать?',
-            attendanceYes: 'Да, с радостью! 🎉',
-            attendanceNo: 'К сожалению, нет 😢',
-            guestsCountLabel: 'Количество гостей — включая вас',
-            messageLabel: 'Пожелание молодожёнам — необязательно',
-            messagePlaceholder: 'Напишите ваше пожелание...',
-            submitButton: 'Отправить ответ 💌',
-            footerText: 'С любовью и нетерпением ждём вас!',
-            requestError: 'Произошла ошибка. Попробуйте ещё раз.',
-            autoplayBlocked: 'Автовоспроизведение заблокировано:'
-        }
-    };
-
-    let currentLang = document.body.dataset.lang || localStorage.getItem('siteLang') || 'kk';
-
-
-    function applyLanguage(lang) {
-        currentLang = lang;
-        localStorage.setItem('siteLang', lang);
-        document.documentElement.lang = lang;
-        document.body.dataset.lang = lang;
-
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const key = element.dataset.i18n;
-            if (translations[lang][key]) {
-                element.textContent = translations[lang][key];
-            }
-        });
-
-        document.querySelectorAll('[data-i18n-html]').forEach(element => {
-            const key = element.dataset.i18nHtml;
-            if (translations[lang][key]) {
-                element.innerHTML = translations[lang][key];
-            }
-        });
-
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-            const key = element.dataset.i18nPlaceholder;
-            if (translations[lang][key]) {
-                element.placeholder = translations[lang][key];
-            }
-        });
-
-        document.querySelectorAll('[data-lang-switch]').forEach(button => {
-            button.classList.toggle('active', button.dataset.langSwitch === lang);
-        });
-
-        document.title = translations[lang].pageTitle;
-    }
-
-    const welcomeScreen = document.getElementById('welcomeScreen');
-    const enterBtn = document.getElementById('enterBtn');
     const envelope = document.getElementById('envelope');
     const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationContainer = document.getElementById('invitationContainer');
@@ -110,48 +8,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const responseMessage = document.getElementById('responseMessage');
     const guestsCountGroup = document.getElementById('guestsCountGroup');
 
-    document.querySelectorAll('[data-lang-switch]').forEach(button => {
-        button.addEventListener('click', function() {
-            applyLanguage(this.dataset.langSwitch);
-        });
-    });
+    const countdownTarget = new Date('2026-08-08T17:00:00');
+    const countdownDays = document.getElementById('countdownDays');
+    const countdownHours = document.getElementById('countdownHours');
+    const countdownMinutes = document.getElementById('countdownMinutes');
+    const countdownSeconds = document.getElementById('countdownSeconds');
 
-    applyLanguage(currentLang);
+    function updateCountdown() {
+        const now = new Date();
+        const diff = countdownTarget - now;
 
-    // Функция запуска музыки
+        if (diff <= 0) {
+            countdownDays.textContent = '0';
+            countdownHours.textContent = '0';
+            countdownMinutes.textContent = '0';
+            countdownSeconds.textContent = '0';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownDays.textContent = days;
+        countdownHours.textContent = hours;
+        countdownMinutes.textContent = minutes;
+        countdownSeconds.textContent = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
     function startMusic() {
         bgMusic.volume = 0.3;
         bgMusic.play().then(() => {
             musicToggle.classList.add('playing');
             musicToggle.textContent = '🎵';
-        }).catch(e => console.log(translations[currentLang].autoplayBlocked, e));
+        }).catch(error => {
+            console.warn('Автовоспроизведение заблокировано:', error);
+        });
     }
 
-    // Клик на кнопку "Открыть приглашение" - запускает музыку!
-    enterBtn.addEventListener('click', function() {
-        // Запускаем музыку сразу при клике
-        startMusic();
-
-        // Скрываем welcome экран
-        welcomeScreen.classList.add('hidden');
-
-        // Показываем конверт
-        envelopeContainer.classList.remove('hidden');
-        envelopeContainer.classList.add('visible');
-    });
-
-    // Открытие конверта
     envelope.addEventListener('click', function() {
+        startMusic();
         envelope.classList.add('open');
 
-        // Скрытие конверта и показ приглашения
         setTimeout(() => {
             envelopeContainer.classList.add('hidden');
             invitationContainer.classList.add('visible');
         }, 800);
     });
 
-    // Управление музыкой
     let isPlaying = false;
     musicToggle.addEventListener('click', function() {
         if (isPlaying) {
@@ -178,14 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
         musicToggle.textContent = '🔇';
     });
 
-    // Показ/скрытие поля количества гостей
     document.querySelectorAll('input[name="attendance"]').forEach(radio => {
         radio.addEventListener('change', function() {
             guestsCountGroup.style.display = this.value === 'yes' ? 'block' : 'none';
         });
     });
 
-    // Отправка формы
     rsvpForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -206,8 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     lastName,
                     willAttend,
                     guestsCount,
-                    message,
-                    lang: currentLang
+                    message
                 })
             });
 
@@ -225,12 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         } catch (error) {
-            responseMessage.textContent = translations[currentLang].requestError;
+            responseMessage.textContent = 'Произошла ошибка. Попробуйте ещё раз.';
             responseMessage.className = 'response-message error';
         }
     });
 
-    // Эффект конфетти
     function createConfetti() {
         const colors = ['#d4af37', '#ff6b6b', '#4ecdc4', '#ffe66d', '#ff8e53'];
 
