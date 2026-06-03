@@ -1,5 +1,5 @@
 import urllib.request
-import json
+import urllib.parse
 from datetime import datetime
 
 # Google Apps Script webhook URL
@@ -7,25 +7,26 @@ WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyemRDpT38YNZz_U7cJjutLzD
 
 
 def sync_guest_to_sheets(first_name, last_name, will_attend, guests_count, message):
-    """Отправить данные гостя в Google Sheet через webhook"""
+    """Отправить данные гостя в Google Sheet через webhook (form-data)"""
     try:
         attendance = 'Да' if will_attend else 'Нет'
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
-        data = {
+        # Формируем данные как URL-encoded form
+        data = urllib.parse.urlencode({
             'timestamp': timestamp,
             'firstName': first_name,
             'lastName': last_name,
             'attendance': attendance,
             'guestCount': guests_count,
             'message': message
-        }
+        }).encode('utf-8')
         
         # Отправляем POST запрос
         req = urllib.request.Request(
             WEBHOOK_URL,
-            data=json.dumps(data).encode('utf-8'),
-            headers={'Content-Type': 'application/json'},
+            data=data,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'},
             method='POST'
         )
         
