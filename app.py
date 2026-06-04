@@ -1,4 +1,5 @@
-﻿from flask import Flask, render_template, request, jsonify
+﻿from flask import Flask, render_template, request, jsonify, send_file
+import os
 from sheets_sync import sync_guest_to_sheets, init_sheets_headers
 from database import add_guest
 from threading import Thread
@@ -7,6 +8,16 @@ app = Flask(__name__)
 
 # Инициализация Google Sheets при запуске
 init_sheets_headers()
+
+# Создаём папку для шрифтов если её нет
+os.makedirs(os.path.join(app.static_folder, 'fonts'), exist_ok=True)
+
+# Копируем шрифт при запуске
+font_src = os.path.join(os.path.dirname(__file__), 'PassionsConflictRUS-Regular.otf')
+font_dst = os.path.join(app.static_folder, 'fonts', 'PassionsConflictRUS-Regular.otf')
+if os.path.exists(font_src) and not os.path.exists(font_dst):
+    import shutil
+    shutil.copy(font_src, font_dst)
 
 
 @app.route('/')

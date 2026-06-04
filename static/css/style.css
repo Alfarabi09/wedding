@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'PassionsConflict';
+    src: url('/static/fonts/PassionsConflictRUS-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     font-family: Georgia, 'Times New Roman', serif;
     font-weight: 700;
@@ -13,6 +21,138 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+}
+
+/* Envelope Screen */
+.envelope-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #9b4d5c 0%, #7d3d4a 50%, #5d2d3a 100%);
+    z-index: 100;
+    transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.envelope-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.full-envelope-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.envelope-flap-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to bottom, rgba(93, 45, 58, 0.5), transparent);
+    pointer-events: none;
+    z-index: 10;
+    transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: top;
+}
+
+.envelope-screen.opening .envelope-flap-top {
+    height: 50%;
+}
+
+.envelope-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    perspective: 1200px;
+}
+
+.envelope-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    text-align: center;
+    padding: 40px 20px;
+    animation: envelopeSlideIn 0.8s cubic-bezier(0.34, 1.2, 0.48, 1);
+}
+
+@keyframes envelopeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.envelope-text-received {
+    font-family: Georgia, serif;
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1.6;
+}
+
+.envelope-button {
+    background: radial-gradient(circle at 30% 30%, #f4d4b0, #e6b880);
+    border: 3px solid #c99960;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #5d2d3a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), 
+                inset 0 -4px 12px rgba(0, 0, 0, 0.15),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    padding: 0;
+    letter-spacing: 1.5px;
+}
+
+.envelope-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 
+                inset 0 -4px 12px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.envelope-button:active {
+    transform: scale(0.96);
+}
+
+.envelope-hint-text {
+    font-family: Georgia, serif;
+    font-size: clamp(16px, 3vw, 24px);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 1px;
+    line-height: 1.6;
+    max-width: 500px;
 }
 
 /* Кнопка музыки */
@@ -36,27 +176,39 @@ body {
     top: 20px;
     left: 20px;
     display: flex;
-    gap: 8px;
+    gap: 12px;
     z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
-.language-btn {
-    padding: 10px 14px;
-    border: 2px solid #d4af37;
+.lang-btn {
+    padding: 8px 16px;
+    border: 2px solid transparent;
     border-radius: 24px;
-    background: rgba(255, 255, 255, 0.9);
+    background: transparent;
     color: #5c4033;
     font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.language-btn:hover,
-.language-btn.active {
-    background: #d4af37;
+.lang-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: scale(1.05);
+}
+
+.lang-btn.active {
+    background: linear-gradient(135deg, #d4af37 0%, #c9a227 100%);
     color: white;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
 }
 
 .music-btn:hover {
@@ -203,9 +355,9 @@ body {
 
 /* Заголовки */
 .title {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: Georgia, serif;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
     color: #8b7355;
     text-transform: uppercase;
     letter-spacing: 8px;
@@ -213,10 +365,9 @@ body {
     margin-bottom: 10px;
 }
 
-
 .names {
-    font-family: 'Alex Brush', 'Great Vibes', cursive;
-    font-size: 72px;
+    font-family: 'PassionsConflict', 'Great Vibes', cursive;
+    font-size: 90px;
     font-weight: 400;
     color: #5c4033;
     text-align: center;
@@ -237,6 +388,17 @@ body {
     line-height: 2;
     color: #666;
     margin-bottom: 30px;
+}
+
+.names-highlight {
+    display: block;
+    font-family: 'PassionsConflict', cursive;
+    font-size: 52px;
+    color: #d4af37;
+    margin: 15px 0;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Секция даты */
@@ -263,8 +425,10 @@ body {
 }
 
 .day {
-    font-size: 14px;
-    color: #888;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #8b7355;
     margin-top: 5px;
 }
 
@@ -298,17 +462,19 @@ body {
 .map-link {
     display: inline-block;
     padding: 12px 25px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #d4af37 0%, #c99960 100%);
+    color: #5c4033;
     text-decoration: none;
     border-radius: 30px;
-    font-size: 14px;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .map-link:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
 }
 
 /* Секция времени */
@@ -331,17 +497,20 @@ body {
 
 .time-label {
     display: block;
-    font-size: 12px;
-    color: #999;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #8b7355;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
 }
 
 .time-value {
-    font-size: 24px;
-    color: #5c4033;
-    font-weight: 500;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #d4af37;
 }
 
 .countdown-section {
@@ -350,8 +519,10 @@ body {
 }
 
 .countdown-label {
-    font-size: 14px;
-    color: #888;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #8b7355;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 18px;
@@ -376,17 +547,20 @@ body {
 
 .countdown-item span {
     display: block;
-    font-size: 38px;
-    color: #5c4033;
+    font-family: Georgia, serif;
+    font-size: 40px;
     font-weight: 700;
+    color: #d4af37;
     line-height: 1;
 }
 
 .countdown-item small {
     display: block;
     margin-top: 8px;
-    font-size: 13px;
-    color: #7a6a59;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #8b7355;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -399,11 +573,10 @@ body {
     margin-top: 30px;
 }
 
-
 .rsvp-section h3 {
     text-align: center;
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-    font-size: 34px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 36px;
     font-weight: 700;
     color: #5c4033;
     margin-bottom: 25px;
@@ -443,12 +616,12 @@ textarea {
     transition: border-color 0.3s;
 }
 
-
 input[type="text"]:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: #d4af37;
+    border-color: #c99960;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 .radio-group {
@@ -464,13 +637,17 @@ textarea:focus {
     padding: 12px 20px;
     background: white;
     border-radius: 10px;
-    border: 2px solid #ddd;
+    border: 2px solid #d4af37;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 500;
     transition: all 0.3s;
 }
 
 .radio-label:has(input:checked) {
-    border-color: #d4af37;
-    background: #fdf8e8;
+    border-color: #c99960;
+    background: linear-gradient(135deg, #f4d4b0, #e6b880);
+    color: #5c4033;
 }
 
 .radio-label input {
@@ -481,18 +658,20 @@ textarea:focus {
     width: 100%;
     padding: 18px;
     background: linear-gradient(135deg, #d4af37 0%, #c9a227 100%);
-    color: white;
+    color: #5c4033;
     border: none;
     border-radius: 30px;
-    font-size: 18px;
-    font-weight: 500;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
+    letter-spacing: 1px;
 }
 
 .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 12px 36px rgba(212, 175, 55, 0.5);
 }
 
 .response-message {
@@ -501,6 +680,8 @@ textarea:focus {
     border-radius: 10px;
     margin-top: 20px;
     display: none;
+    font-family: Georgia, serif;
+    font-size: 18px;
 }
 
 .response-message.success {
@@ -519,15 +700,23 @@ textarea:focus {
 .footer {
     text-align: center;
     margin-top: 30px;
-    color: #888;
+    color: #8b7355;
 }
 
-.signature {
-    font-family: 'Alex Brush', 'Great Vibes', cursive;
-    font-size: 46px;
+.footer p {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.footer .signature {
+    font-family: 'PassionsConflict', 'Great Vibes', cursive;
+    font-size: 58px;
     font-weight: 400;
     color: #d4af37;
     margin-top: 10px;
+    letter-spacing: 2px;
+    line-height: 1;
 }
 
 /* Адаптивность */

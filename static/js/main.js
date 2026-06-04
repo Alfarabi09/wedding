@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация языков
+    initLanguageSwitcher();
+    
     const envelope = document.getElementById('envelope');
     const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationContainer = document.getElementById('invitationContainer');
@@ -330,3 +333,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Функция для переключения языков
+function initLanguageSwitcher() {
+    const langRuBtn = document.getElementById('langRu');
+    const langKzBtn = document.getElementById('langKz');
+    
+    const currentLang = localStorage.getItem('language') || 'ru';
+    setLanguage(currentLang);
+
+    langRuBtn.addEventListener('click', () => setLanguage('ru'));
+    langKzBtn.addEventListener('click', () => setLanguage('kz'));
+}
+
+function setLanguage(lang) {
+    localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
+    document.body.dataset.lang = lang;
+
+    // Обновляем кнопки
+    document.getElementById('langRu').classList.toggle('active', lang === 'ru');
+    document.getElementById('langKz').classList.toggle('active', lang === 'kz');
+
+    // Обновляем текст на странице
+    document.querySelectorAll('[data-ru][data-kz]').forEach(el => {
+        const text = el.dataset[lang];
+        if (text) {
+            el.textContent = text;
+        }
+    });
+
+    // Обновляем placeholders
+    document.querySelectorAll('[data-placeholder-ru][data-placeholder-kz]').forEach(el => {
+        el.placeholder = el.dataset[`placeholder${lang === 'ru' ? 'Ru' : 'Kz'}`];
+    });
+
+    // Обновляем текст кнопки отправить если необходимо
+    const submitBtn = document.querySelector('.submit-btn');
+    if (submitBtn && submitBtn.dataset.ru && submitBtn.dataset.kz) {
+        submitBtn.textContent = submitBtn.dataset[lang];
+    }
+}

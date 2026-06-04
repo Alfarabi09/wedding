@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадьба Альфараби и Нурай 💍</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Antic:wght@400&family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body data-lang="ru">
+    <!-- Переключатель языков -->
+    <div class="language-switcher">
+        <button id="langRu" class="lang-btn active" data-lang="ru">RU</button>
+        <button id="langKz" class="lang-btn" data-lang="kz">KZ</button>
+    </div>
+
     <!-- Кнопка управления музыкой -->
     <button id="musicToggle" class="music-btn">🎵</button>
 
@@ -20,7 +26,7 @@
         <div class="envelope" id="envelope">
             <div class="envelope-flap"></div>
             <div class="envelope-body">
-                <p class="tap-hint">Нажмите, чтобы открыть 💌</p>
+                <p class="tap-hint" data-ru="Нажмите, чтобы открыть 💌" data-kz="Басыңыз 💌"></p>
             </div>
         </div>
     </div>
@@ -40,55 +46,56 @@
             </div>
 
             <!-- Заголовок -->
-            <h1 class="title">Свадьба</h1>
+            <h1 class="title" data-ru="Свадьба" data-kz="Ұйлену той"></h1>
             <h2 class="names">Альфараби & Нурай</h2>
 
             <div class="divider">💍</div>
 
             <!-- Приглашение -->
             <p class="invitation-text">
-                Дорогие гости! Приглашаем вас на торжественную свадьбу наших детей Альфараби и Нурай<br>
-                в этот особенный для нашей семьи день мы хотим разделить с вами нашу радость
+                <span data-ru="Дорогие гости! Приглашаем вас на торжественную свадьбу наших детей" data-kz="Құрметті қонақтар! Сіз(-дер)ді балаларымыз"></span>
+                <span class="names-highlight">
+                    <span data-ru="Альфараби" data-kz="Альфараби"></span> & <span data-ru="Нурай" data-kz="Нурайдын"></span>
+                </span><br>
+                <span data-ru="в этот особенный для нашей семьи день мы хотим разделить с вами нашу радость" data-kz="үйлену тойына арналған салтанатты ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!"></span>
             </p>
 
             <!-- Дата -->
             <div class="date-section">
-                <div class="date-label">Дата</div>
+                <div class="date-label" data-ru="Дата" data-kz="Күні"></div>
                 <div class="date">08.08.2026</div>
-                <div class="day">Суббота</div>
+                <div class="day" data-ru="Суббота" data-kz="Сенбі"></div>
             </div>
 
             <!-- Место -->
             <div class="location-section">
-                <div class="location-label">Место проведения</div>
+                <div class="location-label" data-ru="Место проведения" data-kz="Ұйлену тойының орны"></div>
                 <div class="location">«Mereke Hall» мейрамханасы</div>
-                <div class="city">г. Астана</div>
-                <a href="https://2gis.kz/astana/firm/70000001067098542" target="_blank" class="map-link">
-                    📍 Открыть на карте 2ГИС
-                </a>
+                <div class="city" data-ru="г. Астана" data-kz="Астана қ."></div>
+                <a href="https://2gis.kz/astana/firm/70000001067098542" target="_blank" class="map-link" data-ru="📍 Открыть на карте 2ГИС" data-kz="📍 2ГИС картасында ашу"></a>
             </div>
 
             <!-- Время -->
             <div class="time-section">
                 <div class="time-item">
                     <span class="time-icon">🥂</span>
-                    <span class="time-label">Сбор гостей</span>
-                    <span class="time-value">16:00</span>
+                    <span class="time-label" data-ru="Сбор гостей" data-kz="Қонақтарды қабылдау"></span>
+                    <span class="time-value">15:00</span>
                 </div>
                 <div class="time-item">
                     <span class="time-icon">💒</span>
-                    <span class="time-label">Начало</span>
-                    <span class="time-value">17:00</span>
+                    <span class="time-label" data-ru="Начало" data-kz="Басы"></span>
+                    <span class="time-value">16:00</span>
                 </div>
             </div>
 
             <div class="countdown-section">
-                <div class="countdown-label">До торжества осталось:</div>
+                <div class="countdown-label" data-ru="До торжества осталось:" data-kz="Той басталғанға дейін:"></div>
                 <div class="countdown-timer">
-                    <div class="countdown-item"><span id="countdownDays">0</span> <small>дней</small></div>
-                    <div class="countdown-item"><span id="countdownHours">0</span> <small>часов</small></div>
-                    <div class="countdown-item"><span id="countdownMinutes">0</span> <small>минут</small></div>
-                    <div class="countdown-item"><span id="countdownSeconds">0</span> <small>секунд</small></div>
+                    <div class="countdown-item"><span id="countdownDays">0</span> <small data-ru="дней" data-kz="күн"></small></div>
+                    <div class="countdown-item"><span id="countdownHours">0</span> <small data-ru="часов" data-kz="сағат"></small></div>
+                    <div class="countdown-item"><span id="countdownMinutes">0</span> <small data-ru="минут" data-kz="минут"></small></div>
+                    <div class="countdown-item"><span id="countdownSeconds">0</span> <small data-ru="секунд" data-kz="секунд"></small></div>
                 </div>
             </div>
 
@@ -96,29 +103,29 @@
 
             <!-- Форма RSVP -->
             <div class="rsvp-section">
-                <h3>Подтвердите своё присутствие</h3>
+                <h3 data-ru="Подтвердите своё присутствие" data-kz="Өз қатысуыңызды растаңыз"></h3>
                 <form id="rsvpForm">
                     <div class="form-row">
-                        <input type="text" id="firstName" placeholder="Ваше имя" required>
-                        <input type="text" id="lastName" placeholder="Ваша фамилия" required>
+                        <input type="text" id="firstName" placeholder="Ваше имя" data-placeholder-ru="Ваше имя" data-placeholder-kz="Сіздің есіміңіз" required>
+                        <input type="text" id="lastName" placeholder="Ваша фамилия" data-placeholder-ru="Ваша фамилия" data-placeholder-kz="Сіздің тегіңіз" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Вы сможете присутствовать?</label>
+                        <label data-ru="Вы сможете присутствовать?" data-kz="Сіз қатыса аласыз ба?"></label>
                         <div class="radio-group">
                             <label class="radio-label">
                                 <input type="radio" name="attendance" value="yes" checked>
-                                <span>Да, с радостью! 🎉</span>
+                                <span data-ru="Да, с радостью! 🎉" data-kz="Иә, қуанышпен! 🎉"></span>
                             </label>
                             <label class="radio-label">
                                 <input type="radio" name="attendance" value="no">
-                                <span>К сожалению, нет 😢</span>
+                                <span data-ru="К сожалению, нет 😢" data-kz="Өкінішке орай, жоқ 😢"></span>
                             </label>
                         </div>
                     </div>
 
                     <div class="form-group" id="guestsCountGroup">
-                        <label for="guestsCount">Количество гостей — включая вас</label>
+                        <label for="guestsCount" data-ru="Количество гостей — включая вас" data-kz="Қонақтар саны — сізді қосканда"></label>
                         <select id="guestsCount">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -128,11 +135,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Пожелание молодожёнам — необязательно</label>
-                        <textarea id="message" rows="3" placeholder="Напишите ваше пожелание..."></textarea>
+                        <label for="message" data-ru="Пожелание молодожёнам — необязательно" data-kz="Жастарға тілегіңіз"></label>
+                        <textarea id="message" rows="3" placeholder="Напишите ваше пожелание..." data-placeholder-ru="Напишите ваше пожелание..." data-placeholder-kz="Өзіңіздің тілегіңізді жазуға болады..."></textarea>
                     </div>
 
-                    <button type="submit" class="submit-btn">Отправить ответ 💌</button>
+                    <button type="submit" class="submit-btn" data-ru="Отправить ответ 💌" data-kz="Жауапбыңызды жіберіңіз 💌">Отправить ответ 💌</button>
                 </form>
 
                 <div id="responseMessage" class="response-message"></div>
@@ -140,8 +147,8 @@
 
             <!-- Футер -->
             <div class="footer">
-                <p>С любовью и нетерпением ждём вас!</p>
-                <p class="signature">Амангельды и Динара</p>
+                <p data-ru="С любовью и нетерпением ждём вас!" data-kz="Той йелері"></p>
+                <p class="signature">Амангельды & Динара</p>
             </div>
         </div>
     </div>
